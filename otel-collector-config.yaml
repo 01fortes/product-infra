@@ -6,20 +6,22 @@ receivers:
       http:
         endpoint: 0.0.0.0:4318
 
+
 processors:
   batch:
-
 
 extensions:
   health_check:
   pprof:
   zpages:
 
+
+
 exporters:
-#  otlp/jaeger:
-#    endpoint: jaeger:14250
-#    tls:
-#      insecure: true
+  #  otlp/jaeger:
+  #    endpoint: jaeger:14250
+  #    tls:
+  #      insecure: true
 
   otlphttp/prometheus:
     endpoint: http://prometheus:9090/api/v1/otlp
@@ -33,19 +35,19 @@ exporters:
       insecure: true
 
 service:
-  extensions: [health_check, pprof, zpages]
+  extensions: [ health_check, pprof, zpages ]
   pipelines:
-#    traces:
-#      receivers: [ otlp ]
-#      processors: [batch]
-#      exporters: [ otlp/jaeger ]
+    #    traces:
+    #      receivers: [ otlp ]
+    #      processors: [batch]
+    #      exporters: [ otlp/jaeger ]
 
     metrics:
       receivers: [ otlp ]
-      processors: [batch]
+      processors: [ batch ]
       exporters: [ otlphttp/prometheus ]
 
     logs:
       receivers: [ otlp ]
-      processors: [batch]
+      processors: [ batch ]
       exporters: [ otlphttp/loki ]
