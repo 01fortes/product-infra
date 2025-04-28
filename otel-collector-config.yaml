@@ -9,6 +9,21 @@ receivers:
 
 processors:
   batch:
+  transform/rename-metrics:
+    metric_statements:
+      - context: metric
+        statements:
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
+          - replace_pattern(metric.name, "\\.", "_")
 
 extensions:
   health_check:
@@ -44,7 +59,7 @@ service:
 
     metrics:
       receivers: [ otlp ]
-      processors: [ batch ]
+      processors: [ batch, transform/rename-metrics ]
       exporters: [ otlphttp/prometheus ]
 
     logs:
